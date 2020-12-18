@@ -1,0 +1,10 @@
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.csprojAssemblyReference.cache
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.Main.resources
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.Properties.Resources.resources
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.GenerateResource.cache
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.CoreCompileInputs.cache
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe.config
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\bin\Debug\MultiscaleModelling.pdb
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.exe
+C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.pdb
