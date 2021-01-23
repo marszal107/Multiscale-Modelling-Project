@@ -65,8 +65,10 @@ namespace MultiscaleModelling
 
         public string InclusionShape
         {
-            get { return (string)InclusionShapeComboBox.SelectedValue;}
+            get { return (string)InclusionShapeComboBox.SelectedItem;}
         }
+
+        public PictureBox PictureBox => this.Board;
 
         #endregion Properties
 
@@ -83,7 +85,7 @@ namespace MultiscaleModelling
         private Button activeStateButton = null;
         public Main()
         {
-            this.ca = new AlgorithmCA();
+            this.ca = new AlgorithmCA(this);
 
             InitializeComponent();
             this.SetupBrushes();
@@ -214,12 +216,8 @@ namespace MultiscaleModelling
 
         private void addInclusionButton_Click(object sender, EventArgs e)
         {
-           
-                
-            
-            this.ca.AddRandomInclusions(this.Inclusions, this.InclusionsRadius);
-            this.Board.Refresh();
-
+            ca.AddRandomInclusions(this.Inclusions, this.InclusionsRadius);
+            Board.Refresh();
         }
 
         private void txtLoadButton_Click(object sender, EventArgs e)

@@ -8,3 +8,13 @@ C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\bin\Debug\M
 C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\bin\Debug\MultiscaleModelling.pdb
 C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.exe
 C:\repos\MultiscaleModelling\MultiscaleModelling\MultiscaleModelling\obj\Debug\MultiscaleModelling.pdb
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.csprojAssemblyReference.cache
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.Main.resources
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.Properties.Resources.resources
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.GenerateResource.cache
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.CoreCompileInputs.cache
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.exe
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\obj\Debug\MultiscaleModelling.pdb
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe.config
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe
+D:\Github\Multiscale-Modelling-Project\MultiscaleModelling\bin\Debug\MultiscaleModelling.pdb

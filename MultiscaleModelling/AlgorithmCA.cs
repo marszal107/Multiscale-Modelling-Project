@@ -18,7 +18,13 @@ namespace MultiscaleModelling
         protected Grid grid;
         protected int? idForSelectedGrain;
         private delegate bool ChooseFunction(Cell cell);
-        private Main main;
+
+        private Main _main;
+
+        public AlgorithmCA(Main main)
+        {
+            _main = main;
+        }
 
         private ChooseFunction selectedNeighborhood;
        
@@ -107,17 +113,18 @@ namespace MultiscaleModelling
                 c.NewID = 1;
 
                 int r = radius;
-                if (main.InclusionShape.Equals("Circle"))
+                var selectedValue = _main.InclusionShape;
+                if (selectedValue == "Circle")
                 {
                     AddCircleInclusion(temp_x, temp_y, r);
                 }
-                else if (main.InclusionShape.Equals("Square"))
+                else if (selectedValue == "Square")
                 {
-                    AddRectangle(temp_x, temp_y, r, );
+                    AddRectangle(temp_x, temp_y, r);
                 }
                 else
                 {
-                    ;
+                    continue;
                 }
             }
         }
@@ -127,10 +134,12 @@ namespace MultiscaleModelling
             return ((x * x) + (y * y)) <= r * r;
         }
 
-        public void AddRectangle(int x, int y, int r, PaintEventArgs e)
+        public void AddRectangle(int x, int y, int r)
         {
-            Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 1);
-            e.Graphics.DrawRectangle(blackPen, x, y, r, r);
+            Pen blackPen = new Pen(Color.Black, 1);
+            // Obtain a Graphics object from the Bitmap object.
+            Graphics graphics = _main.PictureBox.CreateGraphics();
+            graphics.DrawRectangle(blackPen, x, y, r, r);
         }
 
         public void AddCircleInclusion(int x, int y, int r)
@@ -160,7 +169,6 @@ namespace MultiscaleModelling
 
         public async Task StartAsync(string name, PictureBox board, CancellationToken ct)
         {
-            
             selectedNeighborhood = Moore;
             while (await StepAsync())
             {
