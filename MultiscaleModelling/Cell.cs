@@ -78,6 +78,32 @@ namespace MultiscaleModelling
             get { return this.Neighbors; }
         }
 
-     
+        public IEnumerable<Cell> NearestMoore
+        {
+            get
+            {
+                return new Cell[]
+                {
+              this.NeighborN,
+              this.NeighborE,
+              this.NeighborS,
+              this.NeighborW,
+                };
+            }
+        }
+
+        public IEnumerable<Cell> FurtherMooreNeighborhood
+        {
+            get
+            {
+                return new Cell[]
+                {
+              this.NeighborNW,
+              this.NeighborNE,
+              this.NeighborSW,
+              this.NeighborSE,
+                };
+            }
+        }
     }
 }

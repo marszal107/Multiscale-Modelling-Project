@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace MultiscaleModelling
 {
@@ -17,10 +18,10 @@ namespace MultiscaleModelling
         protected Grid grid;
         protected int? idForSelectedGrain;
         private delegate bool ChooseFunction(Cell cell);
+        private Main main;
 
         private ChooseFunction selectedNeighborhood;
-
-
+       
         public Grid Grid
         {
             get
@@ -106,13 +107,30 @@ namespace MultiscaleModelling
                 c.NewID = 1;
 
                 int r = radius;
-                AddCircleInclusion(temp_x, temp_y, r);
+                if (main.InclusionShape.Equals("Circle"))
+                {
+                    AddCircleInclusion(temp_x, temp_y, r);
+                }
+                else if (main.InclusionShape.Equals("Square"))
+                {
+                    AddRectangle(temp_x, temp_y, r, );
+                }
+                else
+                {
+                    ;
+                }
             }
         }
 
         private bool isInCircle(int r, int y, int x)
         {
             return ((x * x) + (y * y)) <= r * r;
+        }
+
+        public void AddRectangle(int x, int y, int r, PaintEventArgs e)
+        {
+            Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 1);
+            e.Graphics.DrawRectangle(blackPen, x, y, r, r);
         }
 
         public void AddCircleInclusion(int x, int y, int r)
@@ -183,8 +201,9 @@ namespace MultiscaleModelling
                     Cell c = this.grid.GetCell(x - 1, y);
                     if (c.ID == 2)
                     {
-                        await StepAsync();
+                     
                         c.Selected = true;
+                        //await StepAsync();
                     }
                 }
 
@@ -217,6 +236,26 @@ namespace MultiscaleModelling
         }
 
        
+
+        public void StartSelectGrains(bool changeId)
+        {
+            if (changeId)
+            {
+                this.idForSelectedGrain = 2;
+            }
+            else
+            {
+                this.idForSelectedGrain = null;
+            }
+
+            this.grid.ResetCurrentCellPosition();
+
+            //reset
+            do
+            {
+                this.grid.CurrentCell.Selected = false;
+            } while (this.grid.Next());
+        }
 
         public void SelectGrain(int x, int y)
         {
@@ -253,7 +292,68 @@ namespace MultiscaleModelling
             } while (this.grid.Next());
         }
 
-        
+        public void StartSelectBoundaries()
+        {
+           
+            this.idForSelectedGrain = 2;
+           
+            this.grid.ResetCurrentCellPosition();
+
+            //reset
+            do
+            {
+                this.grid.CurrentCell.Selected = false;
+            } while (this.grid.Next());
+        }
+
+        public void SelectBoundary(int x, int y)
+        {
+            int selectedId = this.grid.GetCell(x, y).ID;
+            this.grid.ResetCurrentCellPosition();
+
+           
+            int length = 0;
+            do
+            {
+                if (this.grid.CurrentCell.ID == selectedId)
+                {
+                    this.grid.CurrentCell.Selected = true;
+
+                    if (this.idForSelectedGrain.HasValue)
+                    {
+                        Cell c = this.grid.GetCell(x - 1, y);
+                        Cell c2 = this.grid.GetCell(x, y);
+                        Cell c3 = this.grid.GetCell(x, y + 1);
+
+                        if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
+                        {
+                            c.ID = 1;
+                            c.NewID = 1;
+                            length++;
+                        }
+                    }
+                }
+            } while (this.grid.Next());
+            
+        }
+
+
+        public void EndSelectBoundaries()
+        {
+            this.grid.ResetCurrentCellPosition();
+            
+            do
+            {
+                if (!this.grid.CurrentCell.Selected && this.grid.CurrentCell.ID > 1) // 0 - empty cell, 1 - inclusion
+                {
+                    this.grid.CurrentCell.ID = 0;
+                    this.grid.CurrentCell.NewID = 0;
+                }
+            } while (this.grid.Next());
+
+          
+        }
+
         protected bool Moore(Cell c)
         {
             CounterReturn cr = this.MooreMostCommonCell(c);
@@ -274,5 +374,118 @@ namespace MultiscaleModelling
             return counter.MostCommonID;
         }
 
+        public bool Step_GBC(int probability)
+        {
+            Random rnd = new Random();
+            int changes = 0;
+            this.grid.ResetCurrentCellPosition();
+
+            //iteracja komorek linia po linii
+            do
+            {
+                
+                if (this.grid.CurrentCell.ID == 0)
+                {
+                    //warunek 1
+                    int id = -1;
+                    int max = -1;
+                    var x = grid.CurrentCell.MooreNeighborhood.Where(a => !a.Selected).GroupBy(a => a.ID).Select(a => new { Id = a.Key, Value = a.Count() }).ToList();
+                    for (int i = 0; i < x.Count; i++)
+                    {
+                        if (x[i].Id == 0 || x[i].Id == 1 || x[i].Id == 2)
+                            continue;
+                        if (x[i].Value > max)
+                        {
+                            id = x[i].Id;
+                            max = x[i].Value;
+                        }
+                    }
+                    if (max >= 5 && id > 1)
+                    {
+                        ++changes;
+                        grid.CurrentCell.NewID = id;
+                        continue;
+                    }
+
+
+                    //warunek 2
+                    id = -1;
+                    max = -1;
+                    x = grid.CurrentCell.NearestMoore.Where(a => !a.Selected).GroupBy(a => a.ID).Select(a => new { Id = a.Key, Value = a.Count() }).ToList();
+                    for (int i = 0; i < x.Count; i++)
+                    {
+
+                        if (x[i].Id == 0 || x[i].Id == 1 || x[i].Id == 2)
+                            continue;
+                        if (x[i].Value > max)
+                        {
+                            id = x[i].Id;
+                            max = x[i].Value;
+                        }
+                    }
+                    if (max >= 3 && id > 1)
+                    {
+                        ++changes;
+                        grid.CurrentCell.NewID = id;
+                        continue;
+                    }
+
+
+                    //warunek 3
+                    id = -1;
+                    max = -1;
+                    x = grid.CurrentCell.FurtherMooreNeighborhood.Where(a => !a.Selected).GroupBy(a => a.ID).Select(a => new { Id = a.Key, Value = a.Count() }).ToList();
+                    for (int i = 0; i < x.Count; i++)
+                    {
+                        if (x[i].Id == 0 || x[i].Id == 1 || x[i].Id == 2)
+                            continue;
+                        if (x[i].Value > max)
+                        {
+                            id = x[i].Id;
+                            max = x[i].Value;
+                        }
+                    }
+                    if (max >= 3 && id > 1)
+                    {
+                        ++changes;
+                        grid.CurrentCell.NewID = id;
+                        continue;
+                    }
+
+                    //warunek 4
+
+                    id = -1;
+                    max = -1;
+                    x = grid.CurrentCell.MooreNeighborhood.Where(a => !a.Selected).GroupBy(a => a.ID).Select(a => new { Id = a.Key, Value = a.Count() }).ToList();
+                    for (int i = 0; i < x.Count; i++)
+                    {
+                        if (x[i].Id == 0 || x[i].Id == 1 || x[i].Id == 2)
+                            continue;
+                        if (x[i].Value > max)
+                        {
+                            id = x[i].Id;
+                            max = x[i].Value;
+                        }
+                    }
+                    int number = rnd.Next(0, 100);
+                    if (id > 1 && number < probability)
+                    {
+                        ++changes;
+                        grid.CurrentCell.NewID = id;
+                        continue;
+                    }
+
+                }
+            } while (this.grid.Next());
+
+            if (changes > 0)
+            {
+                //kopiowanie wartosci
+                this.grid.CopyNewIDtoID();
+                return true;
+            }
+            return false;
+        }
     }
+
 }

@@ -48,8 +48,24 @@
             this.Board = new System.Windows.Forms.PictureBox();
             this.ResetButton = new System.Windows.Forms.Button();
             this.InclusionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.InclusionShapeLabel = new System.Windows.Forms.Label();
+            this.InclusionWhenComboBox = new System.Windows.Forms.ComboBox();
+            this.InclusionShapeComboBox = new System.Windows.Forms.ComboBox();
             this.NumberOfInclusions = new System.Windows.Forms.Label();
             this.CelluralAutomataGroupBox = new System.Windows.Forms.GroupBox();
+            this.GBCgroupBox = new System.Windows.Forms.GroupBox();
+            this.GBCsimulate = new System.Windows.Forms.Button();
+            this.GBCnumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ProbabilityLabel = new System.Windows.Forms.Label();
+            this.SubstructuresGroupBox = new System.Windows.Forms.GroupBox();
+            this.SelectButton = new System.Windows.Forms.Button();
+            this.DPcheckBox = new System.Windows.Forms.CheckBox();
+            this.BoundariesGroupBox = new System.Windows.Forms.GroupBox();
+            this.SelectBoundariesButton = new System.Windows.Forms.Button();
+            this.boundariesButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.BoundariesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.BoardWidthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoardHeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.caGrainsNumericUpDown)).BeginInit();
@@ -58,6 +74,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Board)).BeginInit();
             this.InclusionsGroupBox.SuspendLayout();
             this.CelluralAutomataGroupBox.SuspendLayout();
+            this.GBCgroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GBCnumericUpDown)).BeginInit();
+            this.SubstructuresGroupBox.SuspendLayout();
+            this.BoundariesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BoundariesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // BoardWidthNumericUpDown
@@ -154,7 +175,7 @@
             // 
             this.caSimulateButton.Location = new System.Drawing.Point(156, 74);
             this.caSimulateButton.Name = "caSimulateButton";
-            this.caSimulateButton.Size = new System.Drawing.Size(65, 27);
+            this.caSimulateButton.Size = new System.Drawing.Size(77, 27);
             this.caSimulateButton.TabIndex = 9;
             this.caSimulateButton.Text = "Simulate";
             this.caSimulateButton.UseVisualStyleBackColor = true;
@@ -172,16 +193,16 @@
             // 
             // InclusionsNumericUpDown
             // 
-            this.InclusionsNumericUpDown.Location = new System.Drawing.Point(156, 15);
+            this.InclusionsNumericUpDown.Location = new System.Drawing.Point(168, 15);
             this.InclusionsNumericUpDown.Name = "InclusionsNumericUpDown";
             this.InclusionsNumericUpDown.Size = new System.Drawing.Size(65, 20);
             this.InclusionsNumericUpDown.TabIndex = 11;
             // 
             // addInclusionButton
             // 
-            this.addInclusionButton.Location = new System.Drawing.Point(135, 75);
+            this.addInclusionButton.Location = new System.Drawing.Point(144, 121);
             this.addInclusionButton.Name = "addInclusionButton";
-            this.addInclusionButton.Size = new System.Drawing.Size(86, 23);
+            this.addInclusionButton.Size = new System.Drawing.Size(89, 23);
             this.addInclusionButton.TabIndex = 12;
             this.addInclusionButton.Text = "Add inclusion";
             this.addInclusionButton.UseVisualStyleBackColor = true;
@@ -189,7 +210,7 @@
             // 
             // RadiusNumericUpDown
             // 
-            this.RadiusNumericUpDown.Location = new System.Drawing.Point(156, 41);
+            this.RadiusNumericUpDown.Location = new System.Drawing.Point(168, 41);
             this.RadiusNumericUpDown.Name = "RadiusNumericUpDown";
             this.RadiusNumericUpDown.Size = new System.Drawing.Size(65, 20);
             this.RadiusNumericUpDown.TabIndex = 13;
@@ -202,15 +223,15 @@
             // InclusionRadiusLabel
             // 
             this.InclusionRadiusLabel.AutoSize = true;
-            this.InclusionRadiusLabel.Location = new System.Drawing.Point(13, 48);
+            this.InclusionRadiusLabel.Location = new System.Drawing.Point(13, 41);
             this.InclusionRadiusLabel.Name = "InclusionRadiusLabel";
-            this.InclusionRadiusLabel.Size = new System.Drawing.Size(101, 13);
+            this.InclusionRadiusLabel.Size = new System.Drawing.Size(88, 13);
             this.InclusionRadiusLabel.TabIndex = 15;
-            this.InclusionRadiusLabel.Text = "Radius of inclusions";
+            this.InclusionRadiusLabel.Text = "Size of inclusions";
             // 
             // SaveBitmap_Button
             // 
-            this.SaveBitmap_Button.Location = new System.Drawing.Point(22, 358);
+            this.SaveBitmap_Button.Location = new System.Drawing.Point(194, 485);
             this.SaveBitmap_Button.Name = "SaveBitmap_Button";
             this.SaveBitmap_Button.Size = new System.Drawing.Size(88, 23);
             this.SaveBitmap_Button.TabIndex = 17;
@@ -220,7 +241,7 @@
             // 
             // txtSaveButton
             // 
-            this.txtSaveButton.Location = new System.Drawing.Point(22, 387);
+            this.txtSaveButton.Location = new System.Drawing.Point(194, 511);
             this.txtSaveButton.Name = "txtSaveButton";
             this.txtSaveButton.Size = new System.Drawing.Size(88, 23);
             this.txtSaveButton.TabIndex = 18;
@@ -230,7 +251,7 @@
             // 
             // txtLoadButton
             // 
-            this.txtLoadButton.Location = new System.Drawing.Point(22, 416);
+            this.txtLoadButton.Location = new System.Drawing.Point(194, 540);
             this.txtLoadButton.Name = "txtLoadButton";
             this.txtLoadButton.Size = new System.Drawing.Size(88, 23);
             this.txtLoadButton.TabIndex = 19;
@@ -242,9 +263,10 @@
             // 
             this.Board.BackColor = System.Drawing.Color.White;
             this.Board.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Board.Location = new System.Drawing.Point(247, 12);
+            this.Board.Location = new System.Drawing.Point(299, 54);
             this.Board.Name = "Board";
             this.Board.Size = new System.Drawing.Size(500, 500);
+            this.Board.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Board.TabIndex = 20;
             this.Board.TabStop = false;
             this.Board.Click += new System.EventHandler(this.Board_Click);
@@ -252,7 +274,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(22, 445);
+            this.ResetButton.Location = new System.Drawing.Point(194, 569);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(88, 23);
             this.ResetButton.TabIndex = 21;
@@ -262,6 +284,10 @@
             // 
             // InclusionsGroupBox
             // 
+            this.InclusionsGroupBox.Controls.Add(this.label1);
+            this.InclusionsGroupBox.Controls.Add(this.InclusionShapeLabel);
+            this.InclusionsGroupBox.Controls.Add(this.InclusionWhenComboBox);
+            this.InclusionsGroupBox.Controls.Add(this.InclusionShapeComboBox);
             this.InclusionsGroupBox.Controls.Add(this.NumberOfInclusions);
             this.InclusionsGroupBox.Controls.Add(this.InclusionRadiusLabel);
             this.InclusionsGroupBox.Controls.Add(this.RadiusNumericUpDown);
@@ -269,15 +295,55 @@
             this.InclusionsGroupBox.Controls.Add(this.InclusionsNumericUpDown);
             this.InclusionsGroupBox.Location = new System.Drawing.Point(12, 236);
             this.InclusionsGroupBox.Name = "InclusionsGroupBox";
-            this.InclusionsGroupBox.Size = new System.Drawing.Size(229, 104);
+            this.InclusionsGroupBox.Size = new System.Drawing.Size(249, 156);
             this.InclusionsGroupBox.TabIndex = 22;
             this.InclusionsGroupBox.TabStop = false;
             this.InclusionsGroupBox.Text = "Inclusions";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Add inclusion:";
+            // 
+            // InclusionShapeLabel
+            // 
+            this.InclusionShapeLabel.AutoSize = true;
+            this.InclusionShapeLabel.Location = new System.Drawing.Point(13, 70);
+            this.InclusionShapeLabel.Name = "InclusionShapeLabel";
+            this.InclusionShapeLabel.Size = new System.Drawing.Size(97, 13);
+            this.InclusionShapeLabel.TabIndex = 19;
+            this.InclusionShapeLabel.Text = "Shape of inclusion:";
+            // 
+            // InclusionWhenComboBox
+            // 
+            this.InclusionWhenComboBox.FormattingEnabled = true;
+            this.InclusionWhenComboBox.Items.AddRange(new object[] {
+            "in the beggining",
+            "after the simulation"});
+            this.InclusionWhenComboBox.Location = new System.Drawing.Point(116, 94);
+            this.InclusionWhenComboBox.Name = "InclusionWhenComboBox";
+            this.InclusionWhenComboBox.Size = new System.Drawing.Size(117, 21);
+            this.InclusionWhenComboBox.TabIndex = 18;
+            // 
+            // InclusionShapeComboBox
+            // 
+            this.InclusionShapeComboBox.FormattingEnabled = true;
+            this.InclusionShapeComboBox.Items.AddRange(new object[] {
+            "Circle",
+            "Square"});
+            this.InclusionShapeComboBox.Location = new System.Drawing.Point(116, 67);
+            this.InclusionShapeComboBox.Name = "InclusionShapeComboBox";
+            this.InclusionShapeComboBox.Size = new System.Drawing.Size(117, 21);
+            this.InclusionShapeComboBox.TabIndex = 17;
+            // 
             // NumberOfInclusions
             // 
             this.NumberOfInclusions.AutoSize = true;
-            this.NumberOfInclusions.Location = new System.Drawing.Point(13, 22);
+            this.NumberOfInclusions.Location = new System.Drawing.Point(13, 17);
             this.NumberOfInclusions.Name = "NumberOfInclusions";
             this.NumberOfInclusions.Size = new System.Drawing.Size(105, 13);
             this.NumberOfInclusions.TabIndex = 16;
@@ -293,16 +359,145 @@
             this.CelluralAutomataGroupBox.Controls.Add(this.caGrainsLabel);
             this.CelluralAutomataGroupBox.Location = new System.Drawing.Point(12, 115);
             this.CelluralAutomataGroupBox.Name = "CelluralAutomataGroupBox";
-            this.CelluralAutomataGroupBox.Size = new System.Drawing.Size(229, 115);
+            this.CelluralAutomataGroupBox.Size = new System.Drawing.Size(249, 115);
             this.CelluralAutomataGroupBox.TabIndex = 23;
             this.CelluralAutomataGroupBox.TabStop = false;
             this.CelluralAutomataGroupBox.Text = "Cellural automata - Moore method";
+            // 
+            // GBCgroupBox
+            // 
+            this.GBCgroupBox.Controls.Add(this.GBCsimulate);
+            this.GBCgroupBox.Controls.Add(this.GBCnumericUpDown);
+            this.GBCgroupBox.Controls.Add(this.ProbabilityLabel);
+            this.GBCgroupBox.Location = new System.Drawing.Point(12, 398);
+            this.GBCgroupBox.Name = "GBCgroupBox";
+            this.GBCgroupBox.Size = new System.Drawing.Size(249, 65);
+            this.GBCgroupBox.TabIndex = 24;
+            this.GBCgroupBox.TabStop = false;
+            this.GBCgroupBox.Text = "Grain Boundary Shape Control";
+            // 
+            // GBCsimulate
+            // 
+            this.GBCsimulate.Location = new System.Drawing.Point(145, 30);
+            this.GBCsimulate.Name = "GBCsimulate";
+            this.GBCsimulate.Size = new System.Drawing.Size(88, 23);
+            this.GBCsimulate.TabIndex = 2;
+            this.GBCsimulate.Text = "Simulate";
+            this.GBCsimulate.UseVisualStyleBackColor = true;
+            this.GBCsimulate.Click += new System.EventHandler(this.GBCSimulate_Click);
+            // 
+            // GBCnumericUpDown
+            // 
+            this.GBCnumericUpDown.Location = new System.Drawing.Point(13, 33);
+            this.GBCnumericUpDown.Name = "GBCnumericUpDown";
+            this.GBCnumericUpDown.Size = new System.Drawing.Size(66, 20);
+            this.GBCnumericUpDown.TabIndex = 1;
+            this.GBCnumericUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // ProbabilityLabel
+            // 
+            this.ProbabilityLabel.AutoSize = true;
+            this.ProbabilityLabel.Location = new System.Drawing.Point(10, 16);
+            this.ProbabilityLabel.Name = "ProbabilityLabel";
+            this.ProbabilityLabel.Size = new System.Drawing.Size(72, 13);
+            this.ProbabilityLabel.TabIndex = 0;
+            this.ProbabilityLabel.Text = "Probability [%]";
+            // 
+            // SubstructuresGroupBox
+            // 
+            this.SubstructuresGroupBox.Controls.Add(this.SelectButton);
+            this.SubstructuresGroupBox.Controls.Add(this.DPcheckBox);
+            this.SubstructuresGroupBox.Location = new System.Drawing.Point(12, 469);
+            this.SubstructuresGroupBox.Name = "SubstructuresGroupBox";
+            this.SubstructuresGroupBox.Size = new System.Drawing.Size(114, 85);
+            this.SubstructuresGroupBox.TabIndex = 25;
+            this.SubstructuresGroupBox.TabStop = false;
+            this.SubstructuresGroupBox.Text = "Substructures";
+            // 
+            // SelectButton
+            // 
+            this.SelectButton.Location = new System.Drawing.Point(16, 45);
+            this.SelectButton.Name = "SelectButton";
+            this.SelectButton.Size = new System.Drawing.Size(88, 23);
+            this.SelectButton.TabIndex = 1;
+            this.SelectButton.Text = "Select";
+            this.SelectButton.UseVisualStyleBackColor = true;
+            this.SelectButton.Click += new System.EventHandler(this.stateButton_Click);
+            // 
+            // DPcheckBox
+            // 
+            this.DPcheckBox.AutoSize = true;
+            this.DPcheckBox.Checked = true;
+            this.DPcheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DPcheckBox.Location = new System.Drawing.Point(16, 22);
+            this.DPcheckBox.Name = "DPcheckBox";
+            this.DPcheckBox.Size = new System.Drawing.Size(80, 17);
+            this.DPcheckBox.TabIndex = 0;
+            this.DPcheckBox.Text = "Dual-phase";
+            this.DPcheckBox.UseVisualStyleBackColor = true;
+            this.DPcheckBox.Click += new System.EventHandler(this.DPcheckBox_CheckedChanged);
+            // 
+            // BoundariesGroupBox
+            // 
+            this.BoundariesGroupBox.Controls.Add(this.SelectBoundariesButton);
+            this.BoundariesGroupBox.Controls.Add(this.boundariesButton);
+            this.BoundariesGroupBox.Controls.Add(this.label2);
+            this.BoundariesGroupBox.Controls.Add(this.BoundariesNumericUpDown);
+            this.BoundariesGroupBox.Location = new System.Drawing.Point(12, 566);
+            this.BoundariesGroupBox.Name = "BoundariesGroupBox";
+            this.BoundariesGroupBox.Size = new System.Drawing.Size(176, 76);
+            this.BoundariesGroupBox.TabIndex = 26;
+            this.BoundariesGroupBox.TabStop = false;
+            this.BoundariesGroupBox.Text = "Boundaries";
+            // 
+            // SelectBoundariesButton
+            // 
+            this.SelectBoundariesButton.Location = new System.Drawing.Point(16, 47);
+            this.SelectBoundariesButton.Name = "SelectBoundariesButton";
+            this.SelectBoundariesButton.Size = new System.Drawing.Size(88, 23);
+            this.SelectBoundariesButton.TabIndex = 3;
+            this.SelectBoundariesButton.Text = "Select";
+            this.SelectBoundariesButton.UseVisualStyleBackColor = true;
+            this.SelectBoundariesButton.Click += new System.EventHandler(this.SelectBoundariesButton_Click);
+            // 
+            // boundariesButton
+            // 
+            this.boundariesButton.Location = new System.Drawing.Point(116, 46);
+            this.boundariesButton.Name = "boundariesButton";
+            this.boundariesButton.Size = new System.Drawing.Size(54, 23);
+            this.boundariesButton.TabIndex = 2;
+            this.boundariesButton.Text = "Show";
+            this.boundariesButton.UseVisualStyleBackColor = true;
+            this.boundariesButton.Click += new System.EventHandler(this.boundariesButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Width";
+            // 
+            // BoundariesNumericUpDown
+            // 
+            this.BoundariesNumericUpDown.Location = new System.Drawing.Point(55, 20);
+            this.BoundariesNumericUpDown.Name = "BoundariesNumericUpDown";
+            this.BoundariesNumericUpDown.Size = new System.Drawing.Size(49, 20);
+            this.BoundariesNumericUpDown.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 546);
+            this.ClientSize = new System.Drawing.Size(826, 649);
+            this.Controls.Add(this.BoundariesGroupBox);
+            this.Controls.Add(this.SubstructuresGroupBox);
+            this.Controls.Add(this.GBCgroupBox);
             this.Controls.Add(this.CelluralAutomataGroupBox);
             this.Controls.Add(this.InclusionsGroupBox);
             this.Controls.Add(this.ResetButton);
@@ -326,6 +521,14 @@
             this.InclusionsGroupBox.PerformLayout();
             this.CelluralAutomataGroupBox.ResumeLayout(false);
             this.CelluralAutomataGroupBox.PerformLayout();
+            this.GBCgroupBox.ResumeLayout(false);
+            this.GBCgroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GBCnumericUpDown)).EndInit();
+            this.SubstructuresGroupBox.ResumeLayout(false);
+            this.SubstructuresGroupBox.PerformLayout();
+            this.BoundariesGroupBox.ResumeLayout(false);
+            this.BoundariesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BoundariesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,6 +558,22 @@
         private System.Windows.Forms.GroupBox InclusionsGroupBox;
         private System.Windows.Forms.GroupBox CelluralAutomataGroupBox;
         private System.Windows.Forms.Label NumberOfInclusions;
+        private System.Windows.Forms.GroupBox GBCgroupBox;
+        private System.Windows.Forms.Button GBCsimulate;
+        private System.Windows.Forms.NumericUpDown GBCnumericUpDown;
+        private System.Windows.Forms.Label ProbabilityLabel;
+        private System.Windows.Forms.GroupBox SubstructuresGroupBox;
+        private System.Windows.Forms.Button SelectButton;
+        private System.Windows.Forms.CheckBox DPcheckBox;
+        private System.Windows.Forms.ComboBox InclusionShapeComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label InclusionShapeLabel;
+        private System.Windows.Forms.ComboBox InclusionWhenComboBox;
+        private System.Windows.Forms.GroupBox BoundariesGroupBox;
+        private System.Windows.Forms.Button boundariesButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown BoundariesNumericUpDown;
+        private System.Windows.Forms.Button SelectBoundariesButton;
     }
 }
 
