@@ -68,6 +68,10 @@ namespace MultiscaleModelling
             get { return (string)InclusionShapeComboBox.SelectedItem;}
         }
 
+        public string InclusionWhen
+        {
+            get { return (string)InclusionWhenComboBox.SelectedItem; }
+        }
         public PictureBox PictureBox => this.Board;
 
         #endregion Properties
@@ -384,9 +388,9 @@ namespace MultiscaleModelling
                     {
                         for (int x = 1; x < this.grid.Height; ++x)
                         {
-                            Cell c = this.grid.GetCell(x - this.BoundariesWidth, y);
+                            Cell c = this.grid.GetCell(x - this.BoundariesWidth/2, y);
                             Cell c2 = this.grid.GetCell(x, y);
-                            Cell c3 = this.grid.GetCell(x, y + this.BoundariesWidth);
+                            Cell c3 = this.grid.GetCell(x, y + this.BoundariesWidth/2);
 
                             if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
                             {
@@ -401,9 +405,9 @@ namespace MultiscaleModelling
                     {
                         for (int x = this.grid.Height; x > 0; --x)
                         {
-                            Cell c = this.grid.GetCell(x + this.BoundariesWidth, y);
+                            Cell c = this.grid.GetCell(x + this.BoundariesWidth/2, y);
                             Cell c2 = this.grid.GetCell(x, y);
-                            Cell c3 = this.grid.GetCell(x, y - this.BoundariesWidth);
+                            Cell c3 = this.grid.GetCell(x, y - this.BoundariesWidth/2);
 
                             if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
                             {

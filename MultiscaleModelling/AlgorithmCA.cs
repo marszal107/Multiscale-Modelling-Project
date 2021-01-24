@@ -101,30 +101,71 @@ namespace MultiscaleModelling
 
         public void AddRandomInclusions(int number, int radius)
         {
-            
-            for (int i = 0; i < number; i++)
+            var selectedWhen = _main.InclusionWhen;
+            if (selectedWhen == "in the beggining")
             {
-                Cell c;
-                int temp_x = RandomHelper.Next(this.Width);
-                int temp_y = RandomHelper.Next(this.Height);
+                for (int i = 0; i < number; i++)
+                {
+                    Cell c;
+                    int temp_x = RandomHelper.Next(this.Width);
+                    int temp_y = RandomHelper.Next(this.Height);
 
-                c = this.grid.GetCell(temp_x, temp_y);
-                c.ID = 1;
-                c.NewID = 1;
+                    c = this.grid.GetCell(temp_x, temp_y);
+                    c.ID = 1;
+                    c.NewID = 1;
 
-                int r = radius;
-                var selectedValue = _main.InclusionShape;
-                if (selectedValue == "Circle")
-                {
-                    AddCircleInclusion(temp_x, temp_y, r);
+                    int r = radius;
+                    var selectedValue = _main.InclusionShape;
+                    if (selectedValue == "Circle")
+                    {
+                        AddCircleInclusion(temp_x, temp_y, r);
+                    }
+                    else if (selectedValue == "Square")
+                    {
+                        AddRectangle(temp_x, temp_y, r);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
                 }
-                else if (selectedValue == "Square")
+            }
+
+            else if (selectedWhen == "after the simulation")
+            {
+                
+                for (int i = 0; i < number; i++)
                 {
-                    AddRectangle(temp_x, temp_y, r);
-                }
-                else
-                {
-                    continue;
+                    int temp_x = RandomHelper.Next(this.Width);
+                    int temp_y = RandomHelper.Next(this.Height);
+                    
+                    Cell c = this.grid.GetCell(temp_x, temp_y);
+                    Cell c2 = this.grid.GetCell(temp_x + 1, temp_y + 1);
+                    
+
+                    if (c.ID > 1 && c.ID != c2.ID)
+                    {
+                        int r = radius;
+                        var selectedValue = _main.InclusionShape;
+                        if (selectedValue == "Circle")
+                        {
+                            AddCircleInclusion(temp_x, temp_y, r);
+                        }
+                        else if (selectedValue == "Square")
+                        {
+                            AddRectangle(temp_x, temp_y, r);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else if ((c.ID == 0 || c2.ID == 0) || (c.ID > 1 && c.ID == c2.ID))
+                    {
+                        i--;
+                    }
+
                 }
             }
         }
@@ -136,11 +177,21 @@ namespace MultiscaleModelling
 
         public void AddRectangle(int x, int y, int r)
         {
-            Pen blackPen = new Pen(Color.Black, 1);
-            // Obtain a Graphics object from the Bitmap object.
-            Graphics graphics = _main.PictureBox.CreateGraphics();
-            graphics.DrawRectangle(blackPen, x, y, r, r);
+            for (int i = y - r; i <= y + r; i++)
+            {
+                for (int j = x - r; j <= x + r; j++)
+                {
+
+                    if (i >= 0 && j >= 0 && this.Width > j && this.Height > i)
+                    {
+                        this.AddInclusion(i, j);
+                    }
+
+                }
+            }
         }
+
+       
 
         public void AddCircleInclusion(int x, int y, int r)
         {
