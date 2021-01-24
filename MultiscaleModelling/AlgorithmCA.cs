@@ -9,6 +9,19 @@ using System.Drawing;
 
 namespace MultiscaleModelling
 {
+    public class Part : IEquatable<Part>
+    {
+        public int Cell_X { get; set; }
+
+        public int Cell_Y { get; set; }
+
+        public bool Equals(Part other)
+        {
+            if (other == null) return false;
+            return (this.Cell_X.Equals(other.Cell_X));
+        }
+    }
+
     public class AlgorithmCA
     {
 
@@ -27,7 +40,7 @@ namespace MultiscaleModelling
         }
 
         private ChooseFunction selectedNeighborhood;
-       
+
         public Grid Grid
         {
             get
@@ -130,21 +143,85 @@ namespace MultiscaleModelling
                     }
 
                 }
+                
             }
 
             else if (selectedWhen == "after the simulation")
             {
+                List<Part> PossibleCells = new List<Part>();
+                for (int y = 0; y < this.grid.Width - 1; ++y)
+                {
+                    for (int x = 1; x < this.grid.Height; ++x)
+                    {
+                        Cell c = this.grid.GetCell(x - 1, y);
+                        Cell c2 = this.grid.GetCell(x, y);
+                        Cell c3 = this.grid.GetCell(x, y + 1);
+
+                        if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
+                        {
+                            PossibleCells.Add(new Part() { Cell_X = x, Cell_Y = y });
+                        }
+                    }
+                    
+                }
+                _main.PictureBox.Refresh();
+                HashSet<int> set = new HashSet<int>();
+                grid.ResetCurrentCellPosition();
+                do
+                {
+                    set.Add(grid.CurrentCell.ID);
+
+                } while (grid.Next());
+
+                Random rnd = new Random();
+                for (int i = PossibleCells.Count; i > 1; i--)
+                {
+                    int pos = rnd.Next(i);
+                    var x = PossibleCells[i - 1];
+                    PossibleCells[i - 1] = PossibleCells[pos];
+                    PossibleCells[pos] = x;
+                }
                 
+                int r = radius;
+                var selectedValue = _main.InclusionShape;
                 for (int i = 0; i < number; i++)
+                {
+                    int temp_x = PossibleCells[i].Cell_X;
+                    int temp_y = PossibleCells[i].Cell_Y;
+
+                    if (selectedValue == "Circle")
+                    {
+                        AddCircleInclusion(temp_y, temp_x, r);
+                    }
+                    else if (selectedValue == "Square")
+                    {
+                        AddRectangle(temp_y, temp_x, r);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                /*for (int i = 0; i < number; i++)
                 {
                     int temp_x = RandomHelper.Next(this.Width);
                     int temp_y = RandomHelper.Next(this.Height);
                     
+                    Bitmap b = new Bitmap(_main.PictureBox.ClientSize.Width, _main.PictureBox.Height);
+                    _main.PictureBox.DrawToBitmap(b, _main.PictureBox.ClientRectangle);
+                    Color colour1 = b.GetPixel(temp_x, temp_y);
+                    Color colour2 = b.GetPixel(temp_x-1, temp_y);
+                    Color colour3 = b.GetPixel(temp_x, temp_y-1);
+
+
                     Cell c = this.grid.GetCell(temp_x, temp_y);
-                    Cell c2 = this.grid.GetCell(temp_x + 1, temp_y + 1);
+                    Cell c2 = this.grid.GetCell(temp_x + 1, temp_y);
+                    Cell c3 = this.grid.GetCell(temp_x, temp_y+1);
                     
 
-                    if (c.ID > 1 && c.ID != c2.ID)
+
+                    if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
                     {
                         int r = radius;
                         var selectedValue = _main.InclusionShape;
@@ -161,12 +238,12 @@ namespace MultiscaleModelling
                             continue;
                         }
                     }
-                    else if ((c.ID == 0 || c2.ID == 0) || (c.ID > 1 && c.ID == c2.ID))
+                    else
                     {
                         i--;
-                    }
+                    }*/
 
-                }
+
             }
         }
 

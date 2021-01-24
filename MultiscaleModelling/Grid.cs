@@ -73,6 +73,8 @@ namespace MultiscaleModelling
             }
         }
 
+        
+
         public void ResetCurrentCellPosition()
         {
             this.currentPosX = 0;

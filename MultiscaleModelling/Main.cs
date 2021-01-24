@@ -83,7 +83,6 @@ namespace MultiscaleModelling
         private CancellationTokenSource tokenSource = new CancellationTokenSource();
         
 
-
         
         private Dictionary<Button, EventsOfButton> stateButtons;
         private Button activeStateButton = null;
@@ -388,9 +387,9 @@ namespace MultiscaleModelling
                     {
                         for (int x = 1; x < this.grid.Height; ++x)
                         {
-                            Cell c = this.grid.GetCell(x - this.BoundariesWidth/2, y);
+                            Cell c = this.grid.GetCell(x - this.BoundariesWidth, y);
                             Cell c2 = this.grid.GetCell(x, y);
-                            Cell c3 = this.grid.GetCell(x, y + this.BoundariesWidth/2);
+                            Cell c3 = this.grid.GetCell(x, y + this.BoundariesWidth);
 
                             if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
                             {
@@ -405,9 +404,9 @@ namespace MultiscaleModelling
                     {
                         for (int x = this.grid.Height; x > 0; --x)
                         {
-                            Cell c = this.grid.GetCell(x + this.BoundariesWidth/2, y);
+                            Cell c = this.grid.GetCell(x + this.BoundariesWidth, y);
                             Cell c2 = this.grid.GetCell(x, y);
-                            Cell c3 = this.grid.GetCell(x, y - this.BoundariesWidth/2);
+                            Cell c3 = this.grid.GetCell(x, y - this.BoundariesWidth);
 
                             if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
                             {
@@ -476,27 +475,7 @@ namespace MultiscaleModelling
                 if (this.activeStateButton != null && this.stateButtons.ContainsKey(this.activeStateButton) && this.stateButtons[this.activeStateButton].On != null)
                 {
                     this.stateButtons[this.activeStateButton].On();
-                    /*int length = 0;
-
-                    for (int y = 0; y < this.grid.Width - 1; ++y)
-                    {
-                        for (int x = 1; x < this.grid.Height; ++x)
-                        {
-                            Cell c = this.grid.GetCell(x - this.BoundariesWidth, y);
-                            Cell c2 = this.grid.GetCell(x, y);
-                            Cell c3 = this.grid.GetCell(x, y + this.BoundariesWidth);
-
-                            if (c.ID > 1 && (c.ID != c2.ID || c.ID != c3.ID))
-                            {
-                                c.ID = 1;
-                                c.NewID = 1;
-                                length++;
-                            }
-
-                        }
-                    }
-                    this.Board.Refresh();*/
-
+                  
                 }
             }
 
