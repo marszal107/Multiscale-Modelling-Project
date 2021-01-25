@@ -400,6 +400,15 @@ namespace MultiscaleModelling
 
                         }
                     }
+                    HashSet<int> set = new HashSet<int>();
+
+                    grid.ResetCurrentCellPosition();
+                    do
+                    {
+                        set.Add(grid.CurrentCell.ID);
+
+                    } while (grid.Next());
+
                     for (int y = this.grid.Width; y > 0 - 1; --y)
                     {
                         for (int x = this.grid.Height; x > 0; --x)
@@ -419,8 +428,8 @@ namespace MultiscaleModelling
                     }
                     this.Board.Refresh();
 
-                    //============================================
-                    HashSet<int> set = new HashSet<int>();
+                    
+                    
 
                     grid.ResetCurrentCellPosition();
                     do
@@ -431,11 +440,12 @@ namespace MultiscaleModelling
 
                     var total = set.Count - 1;
                     double averangeGrain = (this.grid.Height * this.grid.Width) / total;
-                    //=============================================
+                    
+                    
 
 
                     DialogResult result;
-                    result = MessageBox.Show("Total Length[pixels] :" + length + "\nAverange size[pixels] :" + averangeGrain);
+                    result = MessageBox.Show("Total Length [px]:" + length + "\nAverange size [px]:" + averangeGrain);
                 }
             }
 
