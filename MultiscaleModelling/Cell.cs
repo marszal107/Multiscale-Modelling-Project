@@ -26,7 +26,6 @@ namespace MultiscaleModelling
             this.ID = ID;
         }
 
-
         #region Neighbors
         //NW    N    NE
         //W     [C]  E 

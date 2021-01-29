@@ -50,6 +50,8 @@ namespace MultiscaleModelling
                 return this.GetCell(this.currentPosX, this.currentPosY);
             }
         }
+        
+        
 
         public Cell GetCell(int x, int y)
         {

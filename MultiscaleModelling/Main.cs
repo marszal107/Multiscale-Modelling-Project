@@ -33,7 +33,7 @@ namespace MultiscaleModelling
             get { return this.gridPeriodicCheckBox.Checked; }
         }
 
-        private int CAGrains
+        public int CAGrains
         {
             get { return (int)this.caGrainsNumericUpDown.Value; }
         }
@@ -53,10 +53,6 @@ namespace MultiscaleModelling
             get { return (int)this.GBCnumericUpDown.Value; }
         }
 
-        private bool DPcheck
-        {
-            get { return this.DPcheckBox.Checked; }
-        }
 
         private int BoundariesWidth
         {
@@ -72,7 +68,12 @@ namespace MultiscaleModelling
         {
             get { return (string)InclusionWhenComboBox.SelectedItem; }
         }
-        public PictureBox PictureBox => this.Board;
+
+        public string Structure
+        {
+            get { return (string)StructureComboBox.SelectedItem; }
+        }
+        
 
         #endregion Properties
 
@@ -282,49 +283,46 @@ namespace MultiscaleModelling
 
         private void stateButton_Click(object sender, EventArgs e)
         {
-            foreach (Button btn in stateButtons.Keys)
-            {
-                btn.BackColor = SystemColors.Control;
-                btn.ForeColor = SystemColors.ControlText;
-            }
-
-            Button clickedButton = sender as Button;
-
             
-            if (this.activeStateButton != null && this.stateButtons.ContainsKey(this.activeStateButton) && this.stateButtons[this.activeStateButton].Off != null)
-            {
-                this.stateButtons[this.activeStateButton].Off();
-            }
-
-            
-            if (this.activeStateButton != clickedButton)
-            {
-                this.activeStateButton = clickedButton;
-                clickedButton.BackColor = SystemColors.Highlight;
-                clickedButton.ForeColor = SystemColors.HighlightText;
-
-                
-                if (this.activeStateButton != null && this.stateButtons.ContainsKey(this.activeStateButton) && this.stateButtons[this.activeStateButton].On != null)
+                foreach (Button btn in stateButtons.Keys)
                 {
-                    this.stateButtons[this.activeStateButton].On();
+                    btn.BackColor = SystemColors.Control;
+                    btn.ForeColor = SystemColors.ControlText;
                 }
-            }
 
+                Button clickedButton = sender as Button;
+
+
+                if (this.activeStateButton != null && this.stateButtons.ContainsKey(this.activeStateButton) && this.stateButtons[this.activeStateButton].Off != null)
+                {
+                    this.stateButtons[this.activeStateButton].Off();
+                }
+
+
+                if (this.activeStateButton != clickedButton)
+                {
+                    this.activeStateButton = clickedButton;
+                    clickedButton.BackColor = SystemColors.Highlight;
+                    clickedButton.ForeColor = SystemColors.HighlightText;
+
+
+                    if (this.activeStateButton != null && this.stateButtons.ContainsKey(this.activeStateButton) && this.stateButtons[this.activeStateButton].On != null)
+                    {
+                        this.stateButtons[this.activeStateButton].On();
+                    }
+                }
+
+
+                else
+                {
+                    activeStateButton = null;
+                }
             
-            else
-            {
-                activeStateButton = null;
-            }
-        }
-
-        private void DPcheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void SelectGrain_Start()
         {
-            this.ca.StartSelectGrains(this.DPcheck);
+            this.ca.StartSelectGrains(this.Structure);
         }
 
         private void SelectGrain(int x, int y)
@@ -495,9 +493,27 @@ namespace MultiscaleModelling
                 activeStateButton = null;
             }
 
-        } 
+        }
 
+        private void SubstructureGenerateButton_Click(object sender, EventArgs e)
+        {
+            ca.AddRandomGrainsSub(this.CAGrains);
+            Board.Refresh();
+            var name = "Moore";
+            tokenSource = new CancellationTokenSource();
 
+            t = Task.Run(async () =>
+            {
+                try
+                {
+                    await ca.StartAsyncSub(name, Board, tokenSource.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    Debug.WriteLine($"\n{nameof(OperationCanceledException)} thrown\n");
+                }
+            }, tokenSource.Token);
+        }
     }
     
 }

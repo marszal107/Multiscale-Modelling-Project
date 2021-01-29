@@ -21,6 +21,12 @@ namespace MultiscaleModelling
 
         private Main _main;
 
+        private Cell _cell;
+
+        
+
+
+
         public AlgorithmCA(Main main)
         {
             _main = main;
@@ -70,6 +76,8 @@ namespace MultiscaleModelling
             return ret.ToArray();
 
         }
+
+      
 
         //algorytm cellurar automata
         public void AddRandomGrains(int number)
@@ -298,9 +306,9 @@ namespace MultiscaleModelling
 
        
 
-        public void StartSelectGrains(bool changeId)
+        public void StartSelectGrains(string changeId)
         {
-            if (changeId)
+            if (changeId=="Dual-phase")
             {
                 this.idForSelectedGrain = 2;
             }
@@ -342,15 +350,28 @@ namespace MultiscaleModelling
         public void EndSelectGrains()
         {
             this.grid.ResetCurrentCellPosition();
-
-            do
+            if (_main.Structure == "Dual-phase")
             {
-                if (!this.grid.CurrentCell.Selected && this.grid.CurrentCell.ID > 1) // 0 - empty cell, 1 - inclusion
+                do
                 {
-                    this.grid.CurrentCell.ID = 0;
-                    this.grid.CurrentCell.NewID = 0;
-                }
-            } while (this.grid.Next());
+                    if (!this.grid.CurrentCell.Selected && this.grid.CurrentCell.ID > 1) // 0 - empty cell, 1 - inclusion
+                    {
+                        this.grid.CurrentCell.ID = 0;
+                        this.grid.CurrentCell.NewID = 0;
+                    }
+                } while (this.grid.Next());
+            }
+            else if (_main.Structure == "Substructure")
+            {
+                do
+                {
+                    if (!this.grid.CurrentCell.Selected && this.grid.CurrentCell.ID > 1) // 0 - empty cell, 1 - inclusion
+                    {
+                        this.grid.CurrentCell.ID = 0;
+                        this.grid.CurrentCell.NewID = 0;
+                    }
+                } while (this.grid.Next());
+            }
         }
 
         public void StartSelectBoundaries()
@@ -546,6 +567,115 @@ namespace MultiscaleModelling
                 return true;
             }
             return false;
+        }
+
+        public async Task StartAsyncSub(string name, PictureBox board, CancellationToken ct)
+        {
+            selectedNeighborhood = Moore;
+            while (await StepAsyncSub())
+            {
+                board.Invoke(new Action(delegate ()
+                {
+                    board.Refresh();
+                }));
+                if (ct.IsCancellationRequested)
+                {
+                    ct.ThrowIfCancellationRequested();
+                }
+            }
+        }
+
+        public async Task NextStepAnsSub(string name, PictureBox board, CancellationToken ct)
+        {
+
+            selectedNeighborhood = Moore;
+            await StepAsyncSub();
+            board.Invoke(new Action(delegate ()
+            {
+                board.Refresh();
+            }));
+
+            if (ct.IsCancellationRequested)
+            {
+                ct.ThrowIfCancellationRequested();
+            }
+        }
+
+        public async Task<bool> StepAsyncSub()
+        {
+
+            for (int x = 0; x < this.grid.Width; x++)
+            {
+                for (int y = 0; y < this.grid.Width; y++)
+                {
+                    Cell c = this.grid.GetCell(x - 1, y);
+                    if (c.ID == 2)
+                    {
+
+                        c.Selected = true;
+                        //await StepAsync();
+                    }
+                    
+                }
+
+            }
+
+
+            int changes = 0;
+            grid.ResetCurrentCellPosition();
+            int[] notUsedIds2 = AddRandomGrainsSub(_main.CAGrains);
+            do
+            {
+                /*int current_ID = grid.CurrentCell.ID;
+                if (notUsedIds2.Contains<int>(current_ID))*/
+                if (notUsedIds2.Contains<int>(grid.CurrentCell.ID))
+                //if (notUsedIds2.Contains<int>(grid.CurrentCell.ID))
+                {
+                    if (selectedNeighborhood(grid.CurrentCell))
+                    {
+                        ++changes;
+                    }
+                }
+            } while (grid.Next());
+
+            if (changes > 0)
+            {
+                //kopiowanie wartosci
+                this.grid.CopyNewIDtoID();
+                return true;
+            }
+            return false;
+        }
+
+        
+        public int[] AddRandomGrainsSub(int number)
+        {
+
+            int[] notUsedIds2 = GetNotUsedIds();
+            for (int i = 0; i < number; ++i)
+            {
+                int temp_x = RandomHelper.Next(this.Width);
+                int temp_y = RandomHelper.Next(this.Height);
+                this.grid.currentPosX = temp_x;
+                this.grid.currentPosY = temp_y;
+                Cell c = this.grid.CurrentCell;
+
+                if (i < notUsedIds2.Length || c.ID != 2)
+                {
+                    
+                    c.ID = notUsedIds2[i];
+                    
+                }
+
+                else
+                {
+                    //brak id
+                    break;
+                }
+                
+            }
+            return notUsedIds2;
+
         }
     }
 

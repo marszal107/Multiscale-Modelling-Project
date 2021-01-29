@@ -58,14 +58,16 @@
             this.GBCsimulate = new System.Windows.Forms.Button();
             this.GBCnumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.ProbabilityLabel = new System.Windows.Forms.Label();
-            this.SubstructuresGroupBox = new System.Windows.Forms.GroupBox();
+            this.StructuresGroupBox = new System.Windows.Forms.GroupBox();
+            this.SubstructureGenerateButton = new System.Windows.Forms.Button();
+            this.StructureComboBox = new System.Windows.Forms.ComboBox();
             this.SelectButton = new System.Windows.Forms.Button();
-            this.DPcheckBox = new System.Windows.Forms.CheckBox();
             this.BoundariesGroupBox = new System.Windows.Forms.GroupBox();
             this.SelectBoundariesButton = new System.Windows.Forms.Button();
             this.boundariesButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.BoundariesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.SubSimulate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BoardWidthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoardHeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.caGrainsNumericUpDown)).BeginInit();
@@ -76,7 +78,7 @@
             this.CelluralAutomataGroupBox.SuspendLayout();
             this.GBCgroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GBCnumericUpDown)).BeginInit();
-            this.SubstructuresGroupBox.SuspendLayout();
+            this.StructuresGroupBox.SuspendLayout();
             this.BoundariesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BoundariesNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -407,39 +409,49 @@
             this.ProbabilityLabel.TabIndex = 0;
             this.ProbabilityLabel.Text = "Probability [%]";
             // 
-            // SubstructuresGroupBox
+            // StructuresGroupBox
             // 
-            this.SubstructuresGroupBox.Controls.Add(this.SelectButton);
-            this.SubstructuresGroupBox.Controls.Add(this.DPcheckBox);
-            this.SubstructuresGroupBox.Location = new System.Drawing.Point(12, 469);
-            this.SubstructuresGroupBox.Name = "SubstructuresGroupBox";
-            this.SubstructuresGroupBox.Size = new System.Drawing.Size(114, 85);
-            this.SubstructuresGroupBox.TabIndex = 25;
-            this.SubstructuresGroupBox.TabStop = false;
-            this.SubstructuresGroupBox.Text = "Substructures";
+            this.StructuresGroupBox.Controls.Add(this.SubSimulate);
+            this.StructuresGroupBox.Controls.Add(this.SubstructureGenerateButton);
+            this.StructuresGroupBox.Controls.Add(this.StructureComboBox);
+            this.StructuresGroupBox.Controls.Add(this.SelectButton);
+            this.StructuresGroupBox.Location = new System.Drawing.Point(12, 469);
+            this.StructuresGroupBox.Name = "StructuresGroupBox";
+            this.StructuresGroupBox.Size = new System.Drawing.Size(176, 101);
+            this.StructuresGroupBox.TabIndex = 25;
+            this.StructuresGroupBox.TabStop = false;
+            this.StructuresGroupBox.Text = "Structures";
+            // 
+            // SubstructureGenerateButton
+            // 
+            this.SubstructureGenerateButton.Location = new System.Drawing.Point(83, 45);
+            this.SubstructureGenerateButton.Name = "SubstructureGenerateButton";
+            this.SubstructureGenerateButton.Size = new System.Drawing.Size(67, 23);
+            this.SubstructureGenerateButton.TabIndex = 28;
+            this.SubstructureGenerateButton.Text = "Add grains";
+            this.SubstructureGenerateButton.UseVisualStyleBackColor = true;
+            this.SubstructureGenerateButton.Click += new System.EventHandler(this.SubstructureGenerateButton_Click);
+            // 
+            // StructureComboBox
+            // 
+            this.StructureComboBox.FormattingEnabled = true;
+            this.StructureComboBox.Items.AddRange(new object[] {
+            "Substructure",
+            "Dual-phase"});
+            this.StructureComboBox.Location = new System.Drawing.Point(16, 18);
+            this.StructureComboBox.Name = "StructureComboBox";
+            this.StructureComboBox.Size = new System.Drawing.Size(134, 21);
+            this.StructureComboBox.TabIndex = 27;
             // 
             // SelectButton
             // 
             this.SelectButton.Location = new System.Drawing.Point(16, 45);
             this.SelectButton.Name = "SelectButton";
-            this.SelectButton.Size = new System.Drawing.Size(88, 23);
+            this.SelectButton.Size = new System.Drawing.Size(58, 23);
             this.SelectButton.TabIndex = 1;
             this.SelectButton.Text = "Select";
             this.SelectButton.UseVisualStyleBackColor = true;
             this.SelectButton.Click += new System.EventHandler(this.stateButton_Click);
-            // 
-            // DPcheckBox
-            // 
-            this.DPcheckBox.AutoSize = true;
-            this.DPcheckBox.Checked = true;
-            this.DPcheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DPcheckBox.Location = new System.Drawing.Point(16, 22);
-            this.DPcheckBox.Name = "DPcheckBox";
-            this.DPcheckBox.Size = new System.Drawing.Size(80, 17);
-            this.DPcheckBox.TabIndex = 0;
-            this.DPcheckBox.Text = "Dual-phase";
-            this.DPcheckBox.UseVisualStyleBackColor = true;
-            this.DPcheckBox.Click += new System.EventHandler(this.DPcheckBox_CheckedChanged);
             // 
             // BoundariesGroupBox
             // 
@@ -447,7 +459,7 @@
             this.BoundariesGroupBox.Controls.Add(this.boundariesButton);
             this.BoundariesGroupBox.Controls.Add(this.label2);
             this.BoundariesGroupBox.Controls.Add(this.BoundariesNumericUpDown);
-            this.BoundariesGroupBox.Location = new System.Drawing.Point(12, 566);
+            this.BoundariesGroupBox.Location = new System.Drawing.Point(12, 576);
             this.BoundariesGroupBox.Name = "BoundariesGroupBox";
             this.BoundariesGroupBox.Size = new System.Drawing.Size(176, 76);
             this.BoundariesGroupBox.TabIndex = 26;
@@ -458,7 +470,7 @@
             // 
             this.SelectBoundariesButton.Location = new System.Drawing.Point(16, 47);
             this.SelectBoundariesButton.Name = "SelectBoundariesButton";
-            this.SelectBoundariesButton.Size = new System.Drawing.Size(88, 23);
+            this.SelectBoundariesButton.Size = new System.Drawing.Size(58, 23);
             this.SelectBoundariesButton.TabIndex = 3;
             this.SelectBoundariesButton.Text = "Select";
             this.SelectBoundariesButton.UseVisualStyleBackColor = true;
@@ -466,7 +478,7 @@
             // 
             // boundariesButton
             // 
-            this.boundariesButton.Location = new System.Drawing.Point(116, 46);
+            this.boundariesButton.Location = new System.Drawing.Point(83, 47);
             this.boundariesButton.Name = "boundariesButton";
             this.boundariesButton.Size = new System.Drawing.Size(54, 23);
             this.boundariesButton.TabIndex = 2;
@@ -495,13 +507,23 @@
             0,
             0});
             // 
+            // SubSimulate
+            // 
+            this.SubSimulate.Location = new System.Drawing.Point(83, 71);
+            this.SubSimulate.Name = "SubSimulate";
+            this.SubSimulate.Size = new System.Drawing.Size(67, 23);
+            this.SubSimulate.TabIndex = 29;
+            this.SubSimulate.Text = "Simulate";
+            this.SubSimulate.UseVisualStyleBackColor = true;
+            this.SubSimulate.Click += new System.EventHandler(this.caSimulateButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 649);
+            this.ClientSize = new System.Drawing.Size(826, 664);
             this.Controls.Add(this.BoundariesGroupBox);
-            this.Controls.Add(this.SubstructuresGroupBox);
+            this.Controls.Add(this.StructuresGroupBox);
             this.Controls.Add(this.GBCgroupBox);
             this.Controls.Add(this.CelluralAutomataGroupBox);
             this.Controls.Add(this.InclusionsGroupBox);
@@ -529,8 +551,7 @@
             this.GBCgroupBox.ResumeLayout(false);
             this.GBCgroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GBCnumericUpDown)).EndInit();
-            this.SubstructuresGroupBox.ResumeLayout(false);
-            this.SubstructuresGroupBox.PerformLayout();
+            this.StructuresGroupBox.ResumeLayout(false);
             this.BoundariesGroupBox.ResumeLayout(false);
             this.BoundariesGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BoundariesNumericUpDown)).EndInit();
@@ -567,9 +588,8 @@
         private System.Windows.Forms.Button GBCsimulate;
         private System.Windows.Forms.NumericUpDown GBCnumericUpDown;
         private System.Windows.Forms.Label ProbabilityLabel;
-        private System.Windows.Forms.GroupBox SubstructuresGroupBox;
+        private System.Windows.Forms.GroupBox StructuresGroupBox;
         private System.Windows.Forms.Button SelectButton;
-        private System.Windows.Forms.CheckBox DPcheckBox;
         private System.Windows.Forms.ComboBox InclusionShapeComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label InclusionShapeLabel;
@@ -579,6 +599,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown BoundariesNumericUpDown;
         private System.Windows.Forms.Button SelectBoundariesButton;
+        private System.Windows.Forms.ComboBox StructureComboBox;
+        private System.Windows.Forms.Button SubstructureGenerateButton;
+        private System.Windows.Forms.Button SubSimulate;
     }
 }
 
