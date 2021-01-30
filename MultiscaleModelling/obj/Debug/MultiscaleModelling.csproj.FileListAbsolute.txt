@@ -28,3 +28,13 @@ C:\repos\Multiscale-Modelling-Project-main\Multiscale-Modelling-Project-main\Mul
 C:\repos\Multiscale-Modelling-Project-main\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.CoreCompileInputs.cache
 C:\repos\Multiscale-Modelling-Project-main\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.exe
 C:\repos\Multiscale-Modelling-Project-main\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.pdb
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe.config
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\bin\Debug\MultiscaleModelling.exe
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\bin\Debug\MultiscaleModelling.pdb
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.csprojAssemblyReference.cache
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.Main.resources
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.Properties.Resources.resources
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.GenerateResource.cache
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.csproj.CoreCompileInputs.cache
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.exe
+C:\repos\Multiscale-Modelling-Project-final\Multiscale-Modelling-Project-main\MultiscaleModelling\obj\Debug\MultiscaleModelling.pdb

@@ -314,7 +314,7 @@ namespace MultiscaleModelling
             }
             else
             {
-                this.idForSelectedGrain = null;
+                this.idForSelectedGrain = 0;
             }
 
             this.grid.ResetCurrentCellPosition();
@@ -331,19 +331,38 @@ namespace MultiscaleModelling
             int selectedId = this.grid.GetCell(x, y).ID;
             this.grid.ResetCurrentCellPosition();
 
-            do
+            if (_main.Structure == "Dual-phase")
             {
-                if (this.grid.CurrentCell.ID == selectedId)
+                do
                 {
-                    this.grid.CurrentCell.Selected = true;
-
-                    if (this.idForSelectedGrain.HasValue)
+                    if (this.grid.CurrentCell.ID == selectedId)
                     {
-                        this.grid.CurrentCell.ID = this.idForSelectedGrain.Value;
-                        this.grid.CurrentCell.NewID = this.idForSelectedGrain.Value;
+                        this.grid.CurrentCell.Selected = true;
+
+                        if (this.idForSelectedGrain.HasValue)
+                        {
+                            this.grid.CurrentCell.ID = this.idForSelectedGrain.Value;
+                            this.grid.CurrentCell.NewID = this.idForSelectedGrain.Value;
+                        }
                     }
-                }
-            } while (this.grid.Next());
+                } while (this.grid.Next());
+            }
+            else if (_main.Structure == "Substructure")
+            {
+                do
+                {
+                    if (this.grid.CurrentCell.ID != selectedId)
+                    {
+                        this.grid.CurrentCell.Selected = true;
+
+                        if (this.idForSelectedGrain.HasValue)
+                        {
+                           /* this.grid.CurrentCell.ID = this.idForSelectedGrain.Value;
+                            this.grid.CurrentCell.NewID = 0;*/
+                        }
+                    }
+                } while (this.grid.Next());
+            }
         }
 
 
@@ -365,10 +384,11 @@ namespace MultiscaleModelling
             {
                 do
                 {
-                    if (!this.grid.CurrentCell.Selected && this.grid.CurrentCell.ID > 1) // 0 - empty cell, 1 - inclusion
+                    if (!this.grid.CurrentCell.Selected) // 0 - empty cell, 1 - inclusion
                     {
                         this.grid.CurrentCell.ID = 0;
                         this.grid.CurrentCell.NewID = 0;
+
                     }
                 } while (this.grid.Next());
             }
@@ -660,7 +680,7 @@ namespace MultiscaleModelling
                 this.grid.currentPosY = temp_y;
                 Cell c = this.grid.CurrentCell;
 
-                if (i < notUsedIds2.Length || c.ID != 2)
+                if (i < notUsedIds2.Length || c.ID != 2 && c.Selected)
                 {
                     
                     c.ID = notUsedIds2[i];

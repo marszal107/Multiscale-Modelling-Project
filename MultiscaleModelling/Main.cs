@@ -327,8 +327,16 @@ namespace MultiscaleModelling
 
         private void SelectGrain(int x, int y)
         {
-            this.ca.SelectGrain(x, y);
-            this.Board.Refresh();
+            if (Structure == "Dual-phase")
+            {
+                this.ca.SelectGrain(x, y);
+                this.Board.Refresh();
+            }
+            else if (Structure == "Substructure")
+            {
+                this.ca.SelectGrain(x, y);
+                this.Board.Refresh();
+            }
         }
 
         private void SelectGrain_End()
